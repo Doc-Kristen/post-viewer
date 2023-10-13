@@ -22,7 +22,7 @@
 			"@pages/*": ["pages/*"],
 			"@assets/*": ["assets/*"],
 			"@images/*": ["assets/images/*"],
-			"@utils/*": ["/src/utils/*"],
+			"@utils/*": ["utils/*"],
 			"@services/*": ["/src/services/*"]
 		},
 
