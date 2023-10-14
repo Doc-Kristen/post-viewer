@@ -24,7 +24,7 @@ const PostItem: React.FC<PostItemProps> = ({ post, index }) => {
 			</ListSubheader>
 			<ListItemText className={style.text}>{description}</ListItemText>
 			<Link to={postsUrl}>
-				<Button variant='contained'>Подробнее</Button>
+				<Button variant='contained'>Просмотр</Button>
 			</Link>
 		</ListItem>
 	)
