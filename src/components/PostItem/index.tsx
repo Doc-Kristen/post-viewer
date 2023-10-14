@@ -2,10 +2,10 @@ import { Button, ListItem, ListItemText, ListSubheader } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import style from './PostItem.module.scss'
-import { Post } from 'types/index'
+import { TPost } from 'types/index'
 
 type PostItemProps = {
-	post: Post
+	post: TPost
 	index: number
 }
 
