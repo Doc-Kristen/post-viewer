@@ -10,7 +10,7 @@ type PostItemProps = {
 }
 
 const PostItem: React.FC<PostItemProps> = ({ post, index }) => {
-	const { title, description, id } = post
+	const { title, body, id } = post
 	const postsUrl = `/posts/${id}`
 
 	return (
@@ -22,7 +22,7 @@ const PostItem: React.FC<PostItemProps> = ({ post, index }) => {
 			<ListSubheader component='h3' className={style.title}>
 				{title}
 			</ListSubheader>
-			<ListItemText className={style.text}>{description}</ListItemText>
+			<ListItemText className={style.text}>{body}</ListItemText>
 			<Link to={postsUrl}>
 				<Button variant='contained'>Просмотр</Button>
 			</Link>

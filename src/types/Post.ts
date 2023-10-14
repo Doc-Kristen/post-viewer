@@ -1,6 +1,6 @@
 type Post = {
 	title: string
-	description: string
-	id: string
+	body: string
+	id: number
 }
 export type { Post }
