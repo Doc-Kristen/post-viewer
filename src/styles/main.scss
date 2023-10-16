@@ -9,3 +9,7 @@
 
 // Normalize
 @import './normalize.scss';
+
+html, body, #root {
+    height: 100%;
+}

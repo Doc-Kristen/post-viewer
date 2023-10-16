@@ -1,33 +1,61 @@
 import { PostItem } from '@components/index'
-import { ListSubheader } from '@mui/material'
 import { TPost } from 'types/index'
 import React from 'react'
 import { FixedSizeList, ListChildComponentProps } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
+import InfiniteLoader from 'react-window-infinite-loader'
 
 type PostListProps = {
 	posts: TPost[]
+	loadMore: () => void
+	moreItemsLoading: boolean
+	totalCount: number
 }
 
-const PostList: React.FC<PostListProps> = ({ posts }) => {
-	const Row = ({ index, style }: ListChildComponentProps) => (
-		<div style={style}>
-			<PostItem key={posts[index].id} post={posts[index]} index={index} />
-		</div>
-	)
+const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount }) => {
+	const isItemLoaded = (index: number): boolean => !!posts[index]
+
+	const Row = ({ index, style }: ListChildComponentProps) => {
+		return (
+			<div style={style}>
+				{posts[index] ? (
+					<PostItem key={posts[index].id} post={posts[index]} index={index} />
+				) : (
+					<div>Пост загружается...</div>
+				)}
+			</div>
+		)
+	}
+
 	return (
-		<div style={{height: '80vh' }}>
-			<ListSubheader component='h2' sx={{ fontSize: '30px', margin: '20px' }}>
+		<>
+			{/* <ListSubheader component='h2' sx={{ fontSize: '30px', margin: '20px' }}>
 				Список постов:
-			</ListSubheader>
+			</ListSubheader> */}
+
 			<AutoSizer>
 				{({ height, width }) => (
-					<FixedSizeList height={height} width={width} itemCount={100} itemSize={64}>
-						{Row}
-					</FixedSizeList>
+					<div className='test'>
+						<InfiniteLoader
+							isItemLoaded={isItemLoaded}
+							itemCount={totalCount}
+							loadMoreItems={loadMore}>
+							{({ onItemsRendered, ref }) => (
+								<FixedSizeList
+									height={height}
+									width={width}
+									itemCount={totalCount}
+									itemSize={64}
+									ref={ref}
+									onItemsRendered={onItemsRendered}>
+									{Row}
+								</FixedSizeList>
+							)}
+						</InfiniteLoader>
+					</div>
 				)}
 			</AutoSizer>
-		</div>
+		</>
 	)
 }
 

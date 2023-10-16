@@ -13,7 +13,11 @@ export const postsApi = createApi({
 			query: id => `/posts/${id}`,
 		}),
 		getPaginatedPosts: builder.query({
-			query: ({ startIndex, stopIndex }) => `/posts?_start=${startIndex}&_end=${stopIndex}`,
+			query: ({ startIndex = 0, stopIndex = 15 }) =>
+				`/posts?_start=${startIndex}&_end=${stopIndex}`,
+			transformResponse(baseQueryReturnValue, meta) {
+				return { baseQueryReturnValue, totalCount: Number(meta?.response?.headers.get('X-Total-Count')) }
+			},
 		}),
 	}),
 })
