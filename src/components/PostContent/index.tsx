@@ -3,7 +3,12 @@ import { AppRoute } from '@utils/const'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const PostContent: React.FC = () => {
+type PostContentProps = {
+	title: string
+	body: string
+}
+
+const PostContent: React.FC<PostContentProps> = ({ title, body }) => {
 	return (
 		<Paper elevation={3}>
 			<Container
@@ -15,12 +20,10 @@ const PostContent: React.FC = () => {
 					padding: '30px',
 				}}>
 				<Typography variant='h4' component='h1' gutterBottom>
-					Заголовок поста
+					{title}
 				</Typography>
 				<Typography variant='subtitle1' gutterBottom>
-					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, ratione! Exercitationem
-					quia explicabo voluptate beatae amet quam dolores dolorem veritatis tenetur alias culpa
-					ex, quidem quo adipisci iusto corrupti aspernatur totam magni.
+					{body}
 				</Typography>
 				<Link to={AppRoute.Main}>
 					<Button variant='contained'>Назад</Button>
