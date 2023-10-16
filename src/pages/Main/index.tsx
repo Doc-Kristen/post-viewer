@@ -6,12 +6,13 @@ import { calculateVisiblePosts } from '@utils/utils'
 import { Box, ListSubheader } from '@mui/material'
 
 const Main: React.FC = () => {
-	const postHeight = 64
+	// Высота каждой строки
+	const itemSize = 100
 
 	const [startIndex, setStartIndex] = React.useState<number>(0)
 	const [moreItemsLoading, setMoreItemsLoading] = React.useState<boolean>(false)
 
-	const firstRenderIndex = calculateVisiblePosts(postHeight)
+	const firstRenderIndex = calculateVisiblePosts(itemSize)
 
 	const [stopIndex, setStopIndex] = React.useState(firstRenderIndex)
 
@@ -26,10 +27,15 @@ const Main: React.FC = () => {
 	const [items, setItems] = React.useState<TPost[]>([])
 
 	const loadMore = () => {
+		const newStartIndex = stopIndex < totalCount ? stopIndex : totalCount - 1
+		const newStopIndex = newStartIndex + 5 < totalCount ? newStartIndex + 5 : totalCount
+
 		setMoreItemsLoading(true)
-		setStartIndex(stopIndex)
-		setStopIndex(stopIndex + 10)
+
+		setStartIndex(newStartIndex)
+		setStopIndex(newStopIndex)
 		setItems([...items, ...posts])
+
 		setMoreItemsLoading(false)
 	}
 
@@ -56,6 +62,7 @@ const Main: React.FC = () => {
 					moreItemsLoading={moreItemsLoading}
 					loadMore={loadMore}
 					totalCount={totalCount}
+					itemSize={itemSize}
 				/>
 			</Box>
 		</Box>

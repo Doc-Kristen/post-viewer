@@ -10,44 +10,40 @@ type PostListProps = {
 	loadMore: () => void
 	moreItemsLoading: boolean
 	totalCount: number
+	itemSize: number
 }
 
-const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount }) => {
+const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSize }) => {
 	const isItemLoaded = (index: number): boolean => !!posts[index]
 
-	const Row = ({ index, style }: ListChildComponentProps) => {
-		return (
-			<div style={style}>
-				{posts[index] ? (
-					<PostItem key={posts[index].id} post={posts[index]} index={index} />
-				) : (
-					<div>Пост загружается...</div>
-				)}
-			</div>
-		)
-	}
+	const Row = ({ index, style }: ListChildComponentProps) => (
+		<div style={style}>
+			{posts[index] ? (
+				<PostItem key={posts[index].id} post={posts[index]} index={index} />
+			) : (
+				<div>Пост загружается...</div>
+			)}
+		</div>
+	)
 
 	return (
-			<AutoSizer>
-				{({ height, width }) => (
-					<InfiniteLoader
-						isItemLoaded={isItemLoaded}
-						itemCount={totalCount}
-						loadMoreItems={loadMore}>
-						{({ onItemsRendered, ref }) => (
-							<FixedSizeList
-								height={height}
-								width={width}
-								itemCount={totalCount}
-								itemSize={64}
-								ref={ref}
-								onItemsRendered={onItemsRendered}>
-								{Row}
-							</FixedSizeList>
-						)}
-					</InfiniteLoader>
-				)}
-			</AutoSizer>
+		<AutoSizer>
+			{({ height, width }) => (
+				<InfiniteLoader isItemLoaded={isItemLoaded} itemCount={totalCount} loadMoreItems={loadMore}>
+					{({ onItemsRendered, ref }) => (
+						<FixedSizeList
+							height={height}
+							width={width}
+							itemCount={totalCount}
+							itemSize={itemSize}
+							ref={ref}
+							onItemsRendered={onItemsRendered}>
+							{Row}
+						</FixedSizeList>
+					)}
+				</InfiniteLoader>
+			)}
+		</AutoSizer>
 	)
 }
 
