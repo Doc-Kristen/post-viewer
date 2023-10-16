@@ -35,7 +35,6 @@ const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount }) => {
 
 			<AutoSizer>
 				{({ height, width }) => (
-					<div className='test'>
 						<InfiniteLoader
 							isItemLoaded={isItemLoaded}
 							itemCount={totalCount}
@@ -52,7 +51,6 @@ const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount }) => {
 								</FixedSizeList>
 							)}
 						</InfiniteLoader>
-					</div>
 				)}
 			</AutoSizer>
 		</>
