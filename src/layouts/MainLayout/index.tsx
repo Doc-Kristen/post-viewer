@@ -1,16 +1,15 @@
+import { Header } from '@components/index'
+import { Box } from '@mui/material'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-// import { Container } from '@mui/material'
-// import { Header } from '@components/index'
-// import { Container } from '@mui/material'
 
 const MainLayout: React.FC = () => {
 	return (
 		<>
-			{/* <Header /> */}
-			{/* <Container style={{ paddingTop: 80 }}> */}
+			<Header />
+			<Box sx={{ height: '100%', paddingTop: '80px'}}>
 				<Outlet />
-			{/* </Container> */}
+			</Box>
 		</>
 	)
 }

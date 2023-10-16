@@ -28,32 +28,26 @@ const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount }) => {
 	}
 
 	return (
-		<>
-			{/* <ListSubheader component='h2' sx={{ fontSize: '30px', margin: '20px' }}>
-				Список постов:
-			</ListSubheader> */}
-
 			<AutoSizer>
 				{({ height, width }) => (
-						<InfiniteLoader
-							isItemLoaded={isItemLoaded}
-							itemCount={totalCount}
-							loadMoreItems={loadMore}>
-							{({ onItemsRendered, ref }) => (
-								<FixedSizeList
-									height={height}
-									width={width}
-									itemCount={totalCount}
-									itemSize={64}
-									ref={ref}
-									onItemsRendered={onItemsRendered}>
-									{Row}
-								</FixedSizeList>
-							)}
-						</InfiniteLoader>
+					<InfiniteLoader
+						isItemLoaded={isItemLoaded}
+						itemCount={totalCount}
+						loadMoreItems={loadMore}>
+						{({ onItemsRendered, ref }) => (
+							<FixedSizeList
+								height={height}
+								width={width}
+								itemCount={totalCount}
+								itemSize={64}
+								ref={ref}
+								onItemsRendered={onItemsRendered}>
+								{Row}
+							</FixedSizeList>
+						)}
+					</InfiniteLoader>
 				)}
 			</AutoSizer>
-		</>
 	)
 }
 

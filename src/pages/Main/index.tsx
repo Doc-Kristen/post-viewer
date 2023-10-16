@@ -3,6 +3,7 @@ import { useGetPaginatedPostsQuery } from '@services/postApi'
 import { TPost } from 'types/index'
 import React from 'react'
 import { calculateVisiblePosts } from '@utils/utils'
+import { Box, ListSubheader } from '@mui/material'
 
 const Main: React.FC = () => {
 	const postHeight = 64
@@ -39,17 +40,25 @@ const Main: React.FC = () => {
 	if (items.length === 0 && posts.length === 0) return <div>Нет постов</div>
 
 	return (
-		<>
-			{/* <Container maxWidth='xl'> */}
-			<PostList
-				posts={items}
-				moreItemsLoading={moreItemsLoading}
-				loadMore={loadMore}
-				totalCount={totalCount}
-			/>
-
-			{/* </Container> */}
-		</>
+		<Box
+			sx={{
+				height: '100%',
+				overflow: 'hidden',
+				display: 'flex',
+				flexDirection: 'column',
+			}}>
+			<ListSubheader component='h2' sx={{ fontSize: '30px', margin: '20px' }}>
+				Список постов:
+			</ListSubheader>
+			<Box sx={{ height: '100%' }}>
+				<PostList
+					posts={items}
+					moreItemsLoading={moreItemsLoading}
+					loadMore={loadMore}
+					totalCount={totalCount}
+				/>
+			</Box>
+		</Box>
 	)
 }
 

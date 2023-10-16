@@ -17,7 +17,7 @@ const PostItem: React.FC<PostItemProps> = ({ post, index }) => {
 		<ListItem
 			className={style.root}
 			component='li'
-			sx={{ display: 'flex', justifyContent: 'space-between' }}>
+			sx={{ display: 'flex', justifyContent: 'space-between', gap: '20px' }}>
 			<span className={style.index}>{index + 1}</span>
 			<ListSubheader component='h3' className={style.title}>
 				{title}
