@@ -27,8 +27,10 @@ const Main: React.FC = () => {
 	const [items, setItems] = React.useState<TPost[]>([])
 
 	const loadMore = () => {
+		const requestStep = 5
 		const newStartIndex = stopIndex < totalCount ? stopIndex : totalCount - 1
-		const newStopIndex = newStartIndex + 5 < totalCount ? newStartIndex + 5 : totalCount
+		const newStopIndex =
+			newStartIndex + requestStep < totalCount ? newStartIndex + requestStep : totalCount
 
 		setMoreItemsLoading(true)
 
