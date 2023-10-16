@@ -4,6 +4,7 @@ import React from 'react'
 import { FixedSizeList, ListChildComponentProps } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import InfiniteLoader from 'react-window-infinite-loader'
+import { Skeleton } from '@mui/material'
 
 type PostListProps = {
 	posts: TPost[]
@@ -21,7 +22,7 @@ const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSi
 			{posts[index] ? (
 				<PostItem key={posts[index].id} post={posts[index]} index={index} />
 			) : (
-				<div>Пост загружается...</div>
+				<Skeleton height={itemSize} />
 			)}
 		</div>
 	)

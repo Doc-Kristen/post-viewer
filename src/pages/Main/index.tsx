@@ -3,7 +3,7 @@ import { useGetPaginatedPostsQuery } from '@services/postApi'
 import { TPost } from 'types/index'
 import React from 'react'
 import { calculateVisiblePosts } from '@utils/utils'
-import { Box, ListSubheader } from '@mui/material'
+import { Alert, Box, CircularProgress, Typography } from '@mui/material'
 
 const Main: React.FC = () => {
 	// Высота каждой строки
@@ -41,11 +41,14 @@ const Main: React.FC = () => {
 		setMoreItemsLoading(false)
 	}
 
-	if (isLoading) return <div>Загрузка...</div>
+	if (isError) return <Alert severity='error'>Ошибка загрузки. Попробуйте позже</Alert>
 
-	if (isError) return <div>Ошибка загрузки</div>
-
-	if (items.length === 0 && posts.length === 0) return <div>Нет постов</div>
+	if (!isLoading && items.length === 0 && posts.length === 0)
+		return (
+			<Typography component='p' variant='h5' sx={{ margin: '15px' }}>
+				Нет постов
+			</Typography>
+		)
 
 	return (
 		<Box
@@ -55,17 +58,26 @@ const Main: React.FC = () => {
 				display: 'flex',
 				flexDirection: 'column',
 			}}>
-			<ListSubheader component='h2' sx={{ fontSize: '30px', margin: '20px' }}>
-				Список постов:
-			</ListSubheader>
 			<Box sx={{ height: '100%' }}>
-				<PostList
-					posts={items}
-					moreItemsLoading={moreItemsLoading}
-					loadMore={loadMore}
-					totalCount={totalCount}
-					itemSize={itemSize}
-				/>
+				{isLoading ? (
+					<Box
+						sx={{
+							position: 'absolute',
+							top: '50%',
+							left: '50%',
+							transform: 'translate(-50%, -50%)',
+						}}>
+						<CircularProgress />
+					</Box>
+				) : (
+					<PostList
+						posts={items}
+						moreItemsLoading={moreItemsLoading}
+						loadMore={loadMore}
+						totalCount={totalCount}
+						itemSize={itemSize}
+					/>
+				)}
 			</Box>
 		</Box>
 	)
