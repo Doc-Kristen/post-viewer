@@ -1,21 +1,26 @@
-import { PostContent } from '@components/index'
+import { ErrorMessage, PostContent, Spinner } from '@components/index'
 import { Container } from '@mui/material'
 import { useGetPostByIdQuery } from '@services/postApi'
+import { AppRoute } from '@utils/const'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
 const Post: React.FC = () => {
 	const { id } = useParams()
 
-	const { data, isError, isLoading } = useGetPostByIdQuery(id)
+	const { data, isLoading, isError } = useGetPostByIdQuery(id)
 
-	if (isLoading) return <div>Загрузка...</div>
-
-	if (isError) return <div>Ошибка загрузки</div>
+	if (isError)
+		return (
+			<ErrorMessage
+				message='Ошибка. Проверьте правильность запроса или повторите позже.'
+				link={AppRoute.Main}
+			/>
+		)
 
 	return (
 		<Container maxWidth='xl' sx={{ padding: '30px' }}>
-			<PostContent title={data.title} body={data.body} />
+			{isLoading ? <Spinner /> : <PostContent title={data?.title} body={data?.body} />}
 		</Container>
 	)
 }

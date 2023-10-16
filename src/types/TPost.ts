@@ -3,4 +3,4 @@ type TPost = {
 	body: string
 	id: number
 }
-export type { TPost as TPost }
+export type { TPost }

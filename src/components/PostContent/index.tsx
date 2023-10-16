@@ -20,10 +20,10 @@ const PostContent: React.FC<PostContentProps> = ({ title, body }) => {
 					padding: '30px',
 				}}>
 				<Typography variant='h4' component='h1' gutterBottom>
-					{title}
+					{title || ''}
 				</Typography>
 				<Typography variant='subtitle1' gutterBottom>
-					{body}
+					{body || ''}
 				</Typography>
 				<Link to={AppRoute.Main}>
 					<Button variant='contained'>Назад</Button>

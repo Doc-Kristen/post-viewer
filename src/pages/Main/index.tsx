@@ -1,9 +1,9 @@
-import { PostList } from '@components/index'
+import { ErrorMessage, PostList, Spinner } from '@components/index'
 import { useGetPaginatedPostsQuery } from '@services/postApi'
 import { TPost } from 'types/index'
 import React from 'react'
 import { calculateVisiblePosts } from '@utils/utils'
-import { Alert, Box, CircularProgress, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 const Main: React.FC = () => {
 	// Высота каждой строки
@@ -41,7 +41,9 @@ const Main: React.FC = () => {
 		setMoreItemsLoading(false)
 	}
 
-	if (isError) return <Alert severity='error'>Ошибка загрузки. Попробуйте позже</Alert>
+	if (isError) {
+		return <ErrorMessage message='Ошибка загрузки постов. Попробуйте позже' />
+	}
 
 	if (!isLoading && items.length === 0 && posts.length === 0)
 		return (
@@ -60,15 +62,7 @@ const Main: React.FC = () => {
 			}}>
 			<Box sx={{ height: '100%' }}>
 				{isLoading ? (
-					<Box
-						sx={{
-							position: 'absolute',
-							top: '50%',
-							left: '50%',
-							transform: 'translate(-50%, -50%)',
-						}}>
-						<CircularProgress />
-					</Box>
+					<Spinner />
 				) : (
 					<PostList
 						posts={items}
