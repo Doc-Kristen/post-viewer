@@ -1,3 +1,12 @@
+Приложение для просмотра постов с бесконечным скроллингом + виртуализацией. 
+
+Стэк: Vite/React/TypeScript/Material UI
+___
+Инструкция по запуску сборки:
+1) Скачать архив
+2)  `npm i`
+3)  `npm run dev`
+___
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
