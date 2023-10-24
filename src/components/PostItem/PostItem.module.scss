@@ -1,17 +1,57 @@
 .root {
 	.index {
 		font-size: 25px;
+		@media (max-width: 767px) {
+			font-size: 15px;
+		}
 	}
 	.title {
 		font-size: 20px;
-		margin-right: auto;
+		position: static;
 	}
 	.title,
 	.text {
 		display: -webkit-box;
-		-webkit-line-clamp: 1;
+		-webkit-line-clamp: 3;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
-		max-width: 50%;
+
+		@media (max-width: 767px) {
+			font-size: 15px;
+		}
+	}
+
+	.title {
+		-webkit-line-clamp: 1;
+	}
+	.img {
+		align-self: flex-end;
+		min-width: 200px;
+		min-height: 200px;
+		max-width: 200px;
+		max-height: 200px;
+		object-fit: cover;
+		background-color: #e8e8e8;
+
+		@media (max-width: 767px) {
+			min-width: 150px;
+			min-height: 150px;
+			max-width: 150px;
+			max-height: 150px;
+		}
+
+		@media (max-width: 375px) {
+			min-width: 100px;
+			min-height: 100px;
+			max-width: 100px;
+			max-height: 100px;
+		}
+	}
+
+	.button {
+		@media (max-width: 767px) {
+			font-size: 10px;
+			padding: 5px;
+		}
 	}
 }

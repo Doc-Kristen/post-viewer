@@ -1,27 +1,21 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { TPost } from 'types/TPost'
 
-const BACKEND_URL = 'https://jsonplaceholder.typicode.com'
+const BACKEND_URL = 'https://api.nasa.gov/planetary'
+const API_KEY = 'jrUx9o5OoXFA2RJjYEwNYQzdJi16B4EnhKSUFO0G'
 
 export const postsApi = createApi({
 	reducerPath: 'postsApi',
 	baseQuery: fetchBaseQuery({ baseUrl: BACKEND_URL }),
 	endpoints: builder => ({
-		getAllPosts: builder.query({
-			query: () => '/posts',
+		getPostById: builder.query<TPost, string>({
+			query: date => `/apod?api_key=${API_KEY}&date=${date}`,
 		}),
-		getPostById: builder.query({
-			query: id => `/posts/${id}`,
-		}),
-		getPaginatedPosts: builder.query({
-			query: ({ startIndex, stopIndex }) => `/posts?_start=${startIndex}&_end=${stopIndex}`,
-			transformResponse(baseQueryReturnValue, meta) {
-				return {
-					baseQueryReturnValue,
-					totalCount: Number(meta?.response?.headers.get('X-Total-Count')),
-				}
-			},
+		getPaginatedPosts: builder.query<TPost[], number>({
+			query: count => `/apod?api_key=${API_KEY}&count=${count}`,
 		}),
 	}),
 })
 
-export const { useGetAllPostsQuery, useGetPostByIdQuery, useGetPaginatedPostsQuery } = postsApi
+export const { useGetPostByIdQuery, useGetPaginatedPostsQuery, useLazyGetPaginatedPostsQuery } =
+	postsApi

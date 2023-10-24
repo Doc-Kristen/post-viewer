@@ -1,0 +1,19 @@
+.root {
+	.title {
+        font-size: 25px;
+		@media (max-width: 767px) {
+			font-size: 15px;
+		}
+	}
+	.img {
+		max-width: 500px;
+		max-height: 500px;
+		object-fit: cover;
+		background-color: #e8e8e8;
+
+		@media (max-width: 767px) {
+			max-width: 250px;
+			max-height: 250px;
+		}
+	}
+}

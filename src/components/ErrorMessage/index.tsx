@@ -3,11 +3,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 type ErrorMessageProps = {
-	message?: string
 	status?: number
 	link?: string
 }
-const ErrorMessage: React.FC<ErrorMessageProps> = ({ message = 'Ошибка', status, link }) => {
+const ErrorMessage: React.FC<ErrorMessageProps> = ({ status, link }) => {
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
 			{status && (
@@ -15,10 +14,10 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ message = 'Ошибка', s
 					{status}
 				</Typography>
 			)}
-			<Alert severity='error'>{message}</Alert>
+			<Alert severity='error'>Error. Please refresh this page or try again later</Alert>
 			{link && (
 				<Link to={link}>
-					<Button variant='contained'>Назад</Button>
+					<Button variant='contained'>Back to main page</Button>
 				</Link>
 			)}
 		</Box>

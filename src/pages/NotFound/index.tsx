@@ -15,13 +15,13 @@ const NotFound: React.FC = () => {
 				padding: '30px',
 			}}>
 			<Typography variant='h4' component='h1' gutterBottom>
-				Ошибка 404
+				Error 404
 			</Typography>
 			<Typography variant='subtitle1' component='p' gutterBottom>
-				Страница не найдена.
+				Page not found
 			</Typography>
 			<Link to={AppRoute.Main}>
-				<Button variant='contained'>Вернуться на главную страницу</Button>
+				<Button variant='contained'>Back to main page</Button>
 			</Link>
 		</Container>
 	)

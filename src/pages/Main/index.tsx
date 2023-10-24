@@ -1,51 +1,47 @@
-import { ErrorMessage, PostList, Spinner } from '@components/index'
-import { useGetPaginatedPostsQuery } from '@services/postApi'
-import { TPost } from 'types/index'
 import React from 'react'
-import { calculateVisiblePosts } from '@utils/utils'
 import { Box, Typography } from '@mui/material'
+import { useGetPaginatedPostsQuery, useLazyGetPaginatedPostsQuery } from '@services/postApi'
+import { calculateVisiblePosts } from '@utils/utils'
+import { TPost } from 'types/index'
+import { ErrorMessage, PostList, Spinner } from '@components/index'
 
 const Main: React.FC = () => {
 	// Высота каждой строки
-	const itemSize = 100
+	const itemSize = 300
+	// Максимальное количество постов (ограничение от API)
+	const totalCount = 1000
+	// Количество подгружаемых постов при скролле
+	const requestStep = 5
 
-	const [startIndex, setStartIndex] = React.useState<number>(0)
 	const [moreItemsLoading, setMoreItemsLoading] = React.useState<boolean>(false)
 
-	const firstRenderIndex = calculateVisiblePosts(itemSize)
+	const firstRenderIndex = calculateVisiblePosts(itemSize) || 1
 
-	const [stopIndex, setStopIndex] = React.useState(firstRenderIndex)
+	const [count, setCount] = React.useState(firstRenderIndex)
 
-	const { data, isError, isLoading } = useGetPaginatedPostsQuery({
-		startIndex: startIndex,
-		stopIndex: stopIndex,
-	})
+	const [loadMorePosts] = useLazyGetPaginatedPostsQuery()
 
-	const posts = (data?.baseQueryReturnValue as TPost[]) || []
-	const totalCount = (data?.totalCount as number) || 0
+	const { data, isError, isLoading } = useGetPaginatedPostsQuery(count)
 
 	const [items, setItems] = React.useState<TPost[]>([])
 
-	const loadMore = () => {
-		const requestStep = 5
-		const newStartIndex = stopIndex < totalCount ? stopIndex : totalCount - 1
-		const newStopIndex =
-			newStartIndex + requestStep < totalCount ? newStartIndex + requestStep : totalCount
-
+	const loadMore = async () => {
 		setMoreItemsLoading(true)
+		setCount(requestStep)
 
-		setStartIndex(newStartIndex)
-		setStopIndex(newStopIndex)
-		setItems([...items, ...posts])
+		await loadMorePosts(requestStep)
+		if (data) {
+			setItems([...items, ...data])
+		}
 
 		setMoreItemsLoading(false)
 	}
 
 	if (isError) {
-		return <ErrorMessage message='Ошибка загрузки постов. Попробуйте позже' />
+		return <ErrorMessage />
 	}
 
-	if (!isLoading && items.length === 0 && posts.length === 0)
+	if (!isLoading && !items.length && !data?.length)
 		return (
 			<Typography component='p' variant='h5' sx={{ margin: '15px' }}>
 				Нет постов
@@ -59,6 +55,7 @@ const Main: React.FC = () => {
 				overflow: 'hidden',
 				display: 'flex',
 				flexDirection: 'column',
+				justifyContent: 'center',
 			}}>
 			<Box sx={{ height: '100%' }}>
 				{isLoading ? (

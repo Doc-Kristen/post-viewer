@@ -15,14 +15,17 @@ type PostListProps = {
 }
 
 const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSize }) => {
+	// Количество постов ниже поля видимости, когда начинается подгрузка данных
+	const overscanCount = 10
+
 	const isItemLoaded = (index: number): boolean => !!posts[index]
 
 	const Row = ({ index, style }: ListChildComponentProps) => (
 		<div style={style}>
 			{posts[index] ? (
-				<PostItem key={posts[index].id} post={posts[index]} index={index} />
+				<PostItem key={posts[index].date} post={posts[index]} index={index} />
 			) : (
-				<Skeleton height={itemSize} />
+				<Skeleton height={itemSize} sx={{ width: '80%', margin: '0 auto' }} />
 			)}
 		</div>
 	)
@@ -38,7 +41,8 @@ const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSi
 							itemCount={totalCount}
 							itemSize={itemSize}
 							ref={ref}
-							onItemsRendered={onItemsRendered}>
+							onItemsRendered={onItemsRendered}
+							overscanCount={overscanCount}>
 							{Row}
 						</FixedSizeList>
 					)}

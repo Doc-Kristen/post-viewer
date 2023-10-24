@@ -7,22 +7,22 @@ import { useParams } from 'react-router-dom'
 
 const Post: React.FC = () => {
 	const { id } = useParams()
+	const postId = id || ''
 
-	const { data, isLoading, isError } = useGetPostByIdQuery(id)
+	const { data, isLoading, isError } = useGetPostByIdQuery(postId)
 
-	if (isError)
+	if (isError) return <ErrorMessage link={AppRoute.Main} />
+	if (isLoading) {
+		return <Spinner />
+	}
+
+	if (data) {
 		return (
-			<ErrorMessage
-				message='Ошибка. Проверьте правильность запроса или повторите позже.'
-				link={AppRoute.Main}
-			/>
+			<Container maxWidth='xl' sx={{ padding: '30px' }}>
+				<PostContent post={data} />
+			</Container>
 		)
-
-	return (
-		<Container maxWidth='xl' sx={{ padding: '30px' }}>
-			{isLoading ? <Spinner /> : <PostContent title={data?.title} body={data?.body} />}
-		</Container>
-	)
+	}
 }
 
 export default Post

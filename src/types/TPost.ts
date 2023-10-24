@@ -1,6 +1,10 @@
 type TPost = {
 	title: string
-	body: string
-	id: number
+	explanation: string
+	url: string
+	hdurl: string
+	copyright: string
+	date: string
 }
 export type { TPost }
+
