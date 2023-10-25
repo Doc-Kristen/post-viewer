@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import debounce from 'lodash.debounce'
 import { useAppDispatch } from '@store/store'
 import { calculateVisiblePosts } from '@utils/utils'
 import { selectPosts } from '@store/post/selector'
@@ -61,6 +62,8 @@ const Main: React.FC = () => {
 		setMoreItemsLoading(false)
 	}
 
+	const debouncedLoadMore = debounce(loadMore, 300)
+
 	React.useEffect(() => {
 		if (!posts.length && !isLoading && !isError && !!data?.length) {
 			dispatch(setPosts(data))
@@ -94,7 +97,7 @@ const Main: React.FC = () => {
 					<PostList
 						posts={posts}
 						moreItemsLoading={moreItemsLoading}
-						loadMore={loadMore}
+						loadMore={debouncedLoadMore}
 						totalCount={totalCount}
 						itemSize={itemSize}
 					/>

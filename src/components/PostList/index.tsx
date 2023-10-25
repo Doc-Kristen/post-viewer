@@ -5,10 +5,11 @@ import InfiniteLoader from 'react-window-infinite-loader'
 import { Skeleton } from '@mui/material'
 import { PostItem } from '@components/index'
 import { TPost } from 'types/index'
+import { DebouncedFunc } from 'lodash'
 
 type PostListProps = {
 	posts: TPost[]
-	loadMore: (visibleStartIndex: number, visibleStopIndex: number) => Promise<void>
+	loadMore: DebouncedFunc<(visibleStartIndex: number, visibleStopIndex: number) => Promise<void>>
 	moreItemsLoading: boolean
 	totalCount: number
 	itemSize: number
