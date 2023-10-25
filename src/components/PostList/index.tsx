@@ -8,7 +8,7 @@ import { Skeleton } from '@mui/material'
 
 type PostListProps = {
 	posts: TPost[]
-	loadMore: () => void
+	loadMore: (visibleStartIndex: number, visibleStopIndex: number) => Promise<void>
 	moreItemsLoading: boolean
 	totalCount: number
 	itemSize: number
@@ -16,7 +16,7 @@ type PostListProps = {
 
 const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSize }) => {
 	// Количество постов ниже поля видимости, когда начинается подгрузка данных
-	const overscanCount = 10
+	const overscanCount = 5
 
 	const isItemLoaded = (index: number): boolean => !!posts[index]
 
