@@ -1,10 +1,10 @@
-import { PostItem } from '@components/index'
-import { TPost } from 'types/index'
 import React from 'react'
 import { FixedSizeList, ListChildComponentProps } from 'react-window'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import InfiniteLoader from 'react-window-infinite-loader'
 import { Skeleton } from '@mui/material'
+import { PostItem } from '@components/index'
+import { TPost } from 'types/index'
 
 type PostListProps = {
 	posts: TPost[]
@@ -15,8 +15,18 @@ type PostListProps = {
 }
 
 const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSize }) => {
-	// Количество постов ниже поля видимости, когда начинается подгрузка данных
+	// Количество постов ниже поля видимости когда начинается подгрузка данных
 	const overscanCount = 5
+
+	const storedIndex = Number(localStorage.getItem('selectedPostIndex'))
+	// позиция скролла при первом рендере (восстановление позиции при возврате на страницу)
+	const initialScrollOffset = storedIndex ? itemSize * storedIndex - itemSize : 0
+
+	React.useEffect(() => {
+		if (storedIndex !== null) {
+			localStorage.removeItem('selectedPostIndex')
+		}
+	}, [storedIndex])
 
 	const isItemLoaded = (index: number): boolean => !!posts[index]
 
@@ -41,6 +51,7 @@ const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSi
 							itemCount={totalCount}
 							itemSize={itemSize}
 							ref={ref}
+							initialScrollOffset={initialScrollOffset}
 							onItemsRendered={onItemsRendered}
 							overscanCount={overscanCount}>
 							{Row}

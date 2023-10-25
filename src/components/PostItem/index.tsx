@@ -1,8 +1,8 @@
-import { Box, Button, ListItem, ListItemText, ListSubheader } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import style from './PostItem.module.scss'
+import { Box, Button, ListItem, ListItemText, ListSubheader } from '@mui/material'
 import { TPost } from 'types/index'
+import style from './PostItem.module.scss'
 
 type PostItemProps = {
 	post: TPost
@@ -13,6 +13,11 @@ const PostItem: React.FC<PostItemProps> = ({ post, index }) => {
 	const { title, explanation, url, date } = post
 
 	const postsUrl = `/posts/${date}`
+
+	// Сохраняет индекс выбранного элемента для корректного восстановления позиции скролла при возвращении на страницу
+	const handlePostClick = () => {
+		localStorage.setItem('selectedPostIndex', index.toString())
+	}
 
 	return (
 		<ListItem
@@ -25,7 +30,7 @@ const PostItem: React.FC<PostItemProps> = ({ post, index }) => {
 				margin: '0 auto',
 			}}>
 			<span className={style.index}>{index + 1}</span>
-			<div className={style.test}>
+			<div>
 				<img
 					width='200px'
 					height='200px'
@@ -45,7 +50,7 @@ const PostItem: React.FC<PostItemProps> = ({ post, index }) => {
 				</ListSubheader>
 				<ListItemText className={style.text}>{explanation}</ListItemText>
 				<Link to={postsUrl}>
-					<Button variant='contained' className={style.button}>
+					<Button variant='contained' onClick={handlePostClick} className={style.button}>
 						View
 					</Button>
 				</Link>
