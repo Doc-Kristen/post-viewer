@@ -16,7 +16,7 @@ type PostListProps = {
 
 const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSize }) => {
 	// Количество постов ниже поля видимости когда начинается подгрузка данных
-	const overscanCount = 5
+	const overscanCount = 10
 
 	const storedIndex = Number(localStorage.getItem('selectedPostIndex'))
 	// позиция скролла при первом рендере (восстановление позиции при возврате на страницу)
