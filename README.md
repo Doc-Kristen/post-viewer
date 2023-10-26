@@ -2,7 +2,6 @@
 
 Стэк: Vite/React/TypeScript/Material UI
 
-
 Источник статей: [NASA Open APIs](https://api.nasa.gov/)
 ___
 Инструкция по запуску сборки:
