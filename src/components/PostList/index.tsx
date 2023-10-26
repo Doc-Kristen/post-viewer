@@ -21,7 +21,7 @@ const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSi
 
 	const storedIndex = Number(localStorage.getItem('selectedPostIndex'))
 	// позиция скролла при первом рендере (восстановление позиции при возврате на страницу)
-	const initialScrollOffset = storedIndex ? itemSize * storedIndex - itemSize : 0
+	const initialScrollOffset = storedIndex ? itemSize * (storedIndex - 1) : 0
 
 	React.useEffect(() => {
 		if (storedIndex !== null) {
