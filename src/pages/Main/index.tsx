@@ -22,7 +22,9 @@ const Main: React.FC = () => {
 
 	const [moreItemsLoading, setMoreItemsLoading] = React.useState<boolean>(false)
 
-	const firstRenderIndex = calculateVisiblePosts(itemSize) || 1
+	// Расчет количества постов для первой отрисовки
+	const firstRenderIndex =
+		calculateVisiblePosts(itemSize) > requestStep ? calculateVisiblePosts(itemSize) : requestStep
 
 	const [count, setCount] = React.useState(firstRenderIndex)
 
