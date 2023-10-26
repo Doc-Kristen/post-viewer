@@ -10,7 +10,7 @@ type PostContentProps = {
 }
 
 const PostContent: React.FC<PostContentProps> = ({ post }) => {
-	const { title, explanation, url, date } = post
+	const { title, explanation, url, date, copyright } = post
 	const postDate = new Date(date).toLocaleDateString()
 	return (
 		<Paper elevation={3} className={style.root}>
@@ -31,9 +31,14 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
 					src={url}
 					alt='Photo from NASA archives'
 					className={style.img}></img>
-				<Typography variant='subtitle1' gutterBottom>
+				<Typography variant='subtitle1' sx={{ fontWeight: 'bold' }} gutterBottom>
 					Date: {postDate}
 				</Typography>
+				{copyright && (
+					<Typography variant='subtitle1' sx={{ fontWeight: 'bold' }} gutterBottom>
+						Author: {copyright}
+					</Typography>
+				)}
 				<Typography variant='subtitle1' gutterBottom>
 					{explanation || ''}
 				</Typography>
