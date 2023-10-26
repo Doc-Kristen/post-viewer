@@ -1,6 +1,6 @@
 import { Button, Container, Paper, Typography } from '@mui/material'
 import { TPost } from 'types/TPost'
-import { AppRoute } from '@utils/const'
+import { AppRoute } from '@helpers/const'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import style from './PostContent.module.scss'

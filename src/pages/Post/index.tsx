@@ -1,7 +1,8 @@
+import { AppRoute } from '@helpers/const'
 import { ErrorMessage, PostContent, Spinner } from '@components/index'
 import { Container } from '@mui/material'
 import { useGetPostByIdQuery } from '@services/postApi'
-import { AppRoute } from '@utils/const'
+
 import React from 'react'
 import { useParams } from 'react-router-dom'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { MainLayout } from '@layouts/index'
-import { AppRoute } from '@utils/const'
+import { AppRoute } from '@helpers/const'
 import { Main, NotFound, Post } from '@pages/index'
 import ThemeProvider from '@mui/material/styles/ThemeProvider'
 import createTheme from '@mui/material/styles/createTheme'

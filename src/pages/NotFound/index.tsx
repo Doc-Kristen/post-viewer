@@ -1,5 +1,5 @@
 import { Button, Container, Typography } from '@mui/material'
-import { AppRoute } from '@utils/const'
+import { AppRoute } from '@helpers/const'
 import React from 'react'
 import { Link } from 'react-router-dom'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, AppBar, Toolbar } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { AppRoute } from '@utils/const'
+import { AppRoute } from '@helpers/const'
 import style from './Header.module.scss'
 
 const Header: React.FC = () => {

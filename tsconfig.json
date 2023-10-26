@@ -19,13 +19,13 @@
 			"@components/*": ["components/*"],
 			"@layouts/*": ["layouts/*"],
 			"@styles/*": ["styles/*"],
-			"@types/*": ["types/*"],
 			"@pages/*": ["pages/*"],
 			"@assets/*": ["assets/*"],
 			"@images/*": ["assets/images/*"],
-			"@utils/*": ["utils/*"],
+			"@helpers/*": ["helpers/*"],
 			"@services/*": ["services/*"],
 			"@store/*": ["store/*"],
+			"types/*": ["types/*"]
 		},
 
 		/* Linting */
