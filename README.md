@@ -1,14 +1,22 @@
-Приложение для просмотра статей о космосе. Демонстрирует реализацию бесконечного скроллинга + виртуализацию. 
+Приложение для просмотра статей о космосе.
+Демонстрирует реализацию бесконечного скроллинга и оптимизацию списка с помощью технологии виртуализации (**react-window**, **react-window-infinite-loader**).
 
-Стэк: Vite/React/TypeScript/Material UI
+**Стэк**: Vite/TypeScript/React/RTK/RTK Query/Material UI
 
-Источник статей: [NASA Open APIs](https://api.nasa.gov/)
-___
+**Источник статей**: [NASA Open APIs](https://api.nasa.gov/)
+
+**В процессе**: тесты (Vitest, React Testing Library)
+
+---
+
 Инструкция по запуску сборки:
-1) Скачать архив
-2)  `npm i`
-3)  `npm run dev`
-___
+
+1. Скачать архив
+2. `npm i`
+3. `npm run dev`
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
