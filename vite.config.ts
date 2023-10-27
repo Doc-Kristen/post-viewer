@@ -28,6 +28,7 @@ export default defineConfig({
 			'@store': '/src/store',
 			'@services': '/src/services',
 			'@routes': '/src/routes',
+			'@test': '/src/test',
 			'types': '/src/types',
 		},
 	},

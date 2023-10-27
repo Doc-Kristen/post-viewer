@@ -19,7 +19,7 @@ const Post: React.FC = () => {
 
 	if (data) {
 		return (
-			<Container maxWidth='xl' sx={{ padding: '30px' }}>
+			<Container maxWidth='xl' sx={{ padding: '30px' }} data-testid='post-page'>
 				<PostContent post={data} />
 			</Container>
 		)

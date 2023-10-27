@@ -85,6 +85,7 @@ const Main: React.FC = () => {
 
 	return (
 		<Box
+			data-testid='main-page'
 			sx={{
 				height: '100%',
 				overflow: 'hidden',
