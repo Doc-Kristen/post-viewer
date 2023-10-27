@@ -43,7 +43,7 @@ describe('Component: PostItem, rendering testing', () => {
 describe('Component: PostItem, routing testing', () => {
 	it('should redirect to page Post when user clicked to link', async () => {
 		renderWithRouter(<PostItem {...mockProps} />)
-		const postPage = screen.queryByTestId('post-page')
+		const postPage = screen.findByTestId('post-page')
 		const link = screen.getByTestId('item-link')
 		expect(link).toBeInTheDocument()
 		await userEvent.click(link)
