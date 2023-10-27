@@ -17,7 +17,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ status, link }) => {
 			<Alert severity='error'>Error. Please refresh this page or try again later</Alert>
 			{link && (
 				<Link to={link}>
-					<Button variant='contained'>Back to main page</Button>
+					<Button variant='contained'>Back</Button>
 				</Link>
 			)}
 		</Box>
