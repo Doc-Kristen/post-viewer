@@ -1,9 +1,10 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Container, Paper, Typography } from '@mui/material'
 import { TPost } from 'types/TPost'
 import { AppRoute } from '@helpers/const'
-import React from 'react'
-import { Link } from 'react-router-dom'
 import style from './PostContent.module.scss'
+import { formatDate } from '@helpers/utils'
 
 type PostContentProps = {
 	post: TPost
@@ -11,7 +12,7 @@ type PostContentProps = {
 
 const PostContent: React.FC<PostContentProps> = ({ post }) => {
 	const { title, explanation, url, date, copyright } = post
-	const postDate = new Date(date).toLocaleDateString()
+	const postDate = formatDate(date)
 	return (
 		<Paper elevation={3} className={style.root}>
 			<Container
