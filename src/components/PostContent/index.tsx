@@ -43,7 +43,7 @@ const PostContent: React.FC<PostContentProps> = ({ post }) => {
 				<Typography variant='subtitle1' gutterBottom>
 					{explanation || ''}
 				</Typography>
-				<Link to={AppRoute.Main}>
+				<Link to={AppRoute.Main} data-testid='link-to-main'>
 					<Button variant='contained'>Go back</Button>
 				</Link>
 			</Container>
