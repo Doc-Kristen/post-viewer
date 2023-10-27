@@ -49,7 +49,7 @@ const PostItem: React.FC<PostItemProps> = ({ post, index }) => {
 					{title}
 				</ListSubheader>
 				<ListItemText className={style.text}>{explanation}</ListItemText>
-				<Link to={postsUrl}>
+				<Link to={postsUrl} data-testid='item-link'>
 					<Button variant='contained' onClick={handlePostClick} className={style.button}>
 						View
 					</Button>
