@@ -4,6 +4,7 @@ import React from 'react'
 const Spinner: React.FC = () => {
 	return (
 		<Box
+			data-testid='spinner'
 			sx={{
 				position: 'absolute',
 				top: '50%',
