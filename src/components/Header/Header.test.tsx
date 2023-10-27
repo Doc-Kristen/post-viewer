@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import Header from './index'
 
 describe('Component: Header', () => {
 	it('should render correctly', () => {
 		render(
-			<Router>
+			<MemoryRouter>
 				<Header />
-			</Router>,
+			</MemoryRouter>,
 		)
-		const title = screen.queryByText(/PostViewer/i)
+		const title = screen.getByText(/PostViewer/i)
 		expect(title).toBeVisible()
 	})
 })
