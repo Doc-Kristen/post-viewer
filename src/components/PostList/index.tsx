@@ -16,10 +16,13 @@ type PostListProps = {
 }
 
 const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSize }) => {
+	const defaultListHeight = itemSize * totalCount
+
 	// Количество постов ниже поля видимости когда начинается подгрузка данных
 	const overscanCount = 10
 
 	const storedIndex = Number(localStorage.getItem('selectedPostIndex'))
+
 	// позиция скролла при первом рендере (восстановление позиции при возврате на страницу)
 	const initialScrollOffset = storedIndex ? itemSize * (storedIndex - 1) : 0
 
@@ -42,12 +45,12 @@ const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSi
 	)
 
 	return (
-		<AutoSizer>
+		<AutoSizer data-testid='post-list'>
 			{({ height, width }) => (
 				<InfiniteLoader isItemLoaded={isItemLoaded} itemCount={totalCount} loadMoreItems={loadMore}>
 					{({ onItemsRendered, ref }) => (
 						<FixedSizeList
-							height={height}
+							height={height || defaultListHeight}
 							width={width}
 							itemCount={totalCount}
 							itemSize={itemSize}

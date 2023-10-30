@@ -21,6 +21,7 @@ const PostItem: React.FC<PostItemProps> = ({ post, index }) => {
 
 	return (
 		<ListItem
+			data-testid='post-item'
 			className={style.root}
 			component='li'
 			sx={{

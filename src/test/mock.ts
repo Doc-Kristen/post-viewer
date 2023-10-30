@@ -11,4 +11,6 @@ export const makeFakePost = (): TPost => ({
 	date: formatDate(faker.date.past()),
 })
 
+export const fakeDataPosts = Array.from({ length: 5 }, () => makeFakePost())
+
 export const makeFakeIndex = (): number => faker.number.int()
