@@ -31,6 +31,6 @@ describe('Component: Header', () => {
 		expect(link).toBeInTheDocument()
 		await userEvent.click(link)
 		const mainPage = screen.getByTestId('main-page')
-		expect(mainPage)
+		expect(mainPage).toBeInTheDocument()
 	})
 })
