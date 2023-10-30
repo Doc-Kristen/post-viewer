@@ -7,7 +7,6 @@ import { renderWithRouter } from '@test/helpers/renderWithRouter'
 const mockProps = {
 	posts: fakeDataPosts,
 	loadMore: debounce(vitest.fn(), 300),
-	moreItemsLoading: false,
 	totalCount: 1000,
 	itemSize: 100,
 }
@@ -16,7 +15,6 @@ beforeEach(() => {
 	renderWithRouter(
 		<PostList
 			posts={mockProps.posts}
-			moreItemsLoading={mockProps.moreItemsLoading}
 			loadMore={mockProps.loadMore}
 			totalCount={mockProps.totalCount}
 			itemSize={mockProps.itemSize}

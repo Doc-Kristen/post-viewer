@@ -20,8 +20,6 @@ const Main: React.FC = () => {
 	// Количество подгружаемых постов при скролле
 	const requestStep = 10
 
-	const [moreItemsLoading, setMoreItemsLoading] = React.useState<boolean>(false)
-
 	// Расчет количества постов для первой отрисовки
 	const firstRenderIndex =
 		calculateVisiblePosts(itemSize) > requestStep ? calculateVisiblePosts(itemSize) : requestStep
@@ -35,7 +33,6 @@ const Main: React.FC = () => {
 	const cache = React.useMemo(() => new Set(posts.map(post => post.date)), [posts])
 
 	const loadMore = async (visibleStartIndex: number, visibleStopIndex: number) => {
-		setMoreItemsLoading(true)
 		setCount(requestStep)
 
 		const length = visibleStopIndex - visibleStartIndex
@@ -60,8 +57,6 @@ const Main: React.FC = () => {
 				dispatch(setPosts([...posts, ...data]))
 			}
 		}
-
-		setMoreItemsLoading(false)
 	}
 
 	const debouncedLoadMore = debounce(loadMore, 300)
@@ -99,7 +94,6 @@ const Main: React.FC = () => {
 				) : (
 					<PostList
 						posts={posts}
-						moreItemsLoading={moreItemsLoading}
 						loadMore={debouncedLoadMore}
 						totalCount={totalCount}
 						itemSize={itemSize}

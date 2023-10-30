@@ -10,7 +10,6 @@ import { DebouncedFunc } from 'lodash'
 type PostListProps = {
 	posts: TPost[]
 	loadMore: DebouncedFunc<(visibleStartIndex: number, visibleStopIndex: number) => Promise<void>>
-	moreItemsLoading: boolean
 	totalCount: number
 	itemSize: number
 }
