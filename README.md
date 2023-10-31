@@ -1,7 +1,9 @@
 Приложение для просмотра статей о космосе, собранных из [NASA Open APIs](https://api.nasa.gov/)
 
 **Стэк**: Vite/TypeScript/React/RTK/RTK Query/Material UI
+
 **Демонстрация**: [PostViewer](https://post-viewer-six.vercel.app)
+
 **Особенности приложения**:
 - **Бесконечный скроллинг**: поддерживает бесконечную загрузку статей.
 - **Виртуализация**: используются технологии [react-window ](https://github.com/bvaughn/react-window) и [react-window-infinite-loader](https://www.npmjs.com/package/react-window-infinite-loader) для оптимизации списка статей. Это улучшает производительность при работе с большими объемами данных.
