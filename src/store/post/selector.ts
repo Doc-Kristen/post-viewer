@@ -1,3 +1,3 @@
 import { RootState } from '@store/store'
 
-export const selectPosts = (state: RootState) => state.post
+export const selectPosts = (state: RootState) => state.posts.postList

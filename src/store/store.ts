@@ -1,16 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { postsApi } from '@services/postApi'
-import post from './post/slice'
 import { useDispatch } from 'react-redux'
+import { rootReducer } from './root-reducer'
 
-export const store = configureStore({
-	reducer: {
-		[postsApi.reducerPath]: postsApi.reducer,
-		post,
-	},
-	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(postsApi.middleware),
-})
+const createReduxStore = (initialState = {}) => {
+	return configureStore({
+		reducer: rootReducer,
+		preloadedState: initialState,
+		middleware: getDefaultMiddleware => getDefaultMiddleware().concat(postsApi.middleware),
+	})
+}
+
+export const store = createReduxStore()
 
 setupListeners(store.dispatch)
 

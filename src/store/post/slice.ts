@@ -1,20 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { TPost } from 'types/TPost'
 
-interface userState {
-	posts: TPost[]
+interface postSliceState {
+	postList: TPost[]
 }
 
-const initialState: userState = {
-	posts: [],
+const initialState: postSliceState = {
+	postList: [],
 }
 
 const postSlice = createSlice({
-	name: 'post',
+	name: 'posts',
 	initialState,
 	reducers: {
 		setPosts(state, action) {
-			state.posts = action.payload
+			state.postList = action.payload
 		},
 	},
 })

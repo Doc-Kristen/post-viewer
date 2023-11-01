@@ -11,7 +11,7 @@ import { ErrorMessage, PostList, Spinner } from '@components/index'
 
 const Main: React.FC = () => {
 	const dispatch = useAppDispatch()
-	const { posts } = useSelector(selectPosts)
+	const posts = useSelector(selectPosts)
 
 	// Высота каждой строки
 	const itemSize = 300
