@@ -12,7 +12,7 @@ type PostContentProps = {
 
 const PostContent: React.FC<PostContentProps> = ({ post }) => {
 	const { title, explanation, url, date, copyright } = post
-	const postDate = formatDate(date)
+	const postDate = date ? formatDate(date) : ''
 	return (
 		<Paper elevation={3} className={style.root}>
 			<Container
