@@ -14,6 +14,13 @@ export const getPaginatedPostsHandler = [
 		return HttpResponse.json(mockPosts)
 	}),
 ]
+
+export const emptyResponseHandler = [
+	http.get('https://api.nasa.gov/planetary/apod', () => {
+		return HttpResponse.json(null)
+	}),
+]
+
 export const errorHandler = [
 	http.get('https://api.nasa.gov/planetary/apod', () => {
 		return HttpResponse.error()
