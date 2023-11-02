@@ -8,7 +8,7 @@
 - **Бесконечный скроллинг**: поддерживает бесконечную загрузку статей.
 - **Виртуализация**: используются технологии [react-window ](https://github.com/bvaughn/react-window) и [react-window-infinite-loader](https://www.npmjs.com/package/react-window-infinite-loader) для оптимизации списка статей. Это улучшает производительность при работе с большими объемами данных.
 
-**В процессе**: тесты (Vitest, React Testing Library)
+**В процессе**: тесты (Vitest, React Testing Library, Mock Service Worker)
 
 ---
 
