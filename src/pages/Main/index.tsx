@@ -74,7 +74,7 @@ const Main: React.FC = () => {
 	if (!isLoading && !posts.length && !data?.length)
 		return (
 			<Typography component='p' variant='h5' sx={{ margin: '15px' }}>
-				Нет постов
+				No Posts
 			</Typography>
 		)
 

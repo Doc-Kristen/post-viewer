@@ -58,10 +58,10 @@ describe('Component: Main', function () {
 		})
 	})
 
-	it('should show an message "Нет постов" when data fetching', async () => {
+	it('should show an message "No Posts" when data fetching', async () => {
 		server.use(...emptyResponseHandler)
 		const { getByText } = renderWithProviders(<Main />)
-		const message = /Нет постов/i
+		const message = /No Posts/i
 
 		await waitFor(() => {
 			expect(getByText(message)).toBeInTheDocument()
