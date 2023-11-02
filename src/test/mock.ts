@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { formatDate } from '@helpers/utils'
+import { formatDate } from '@utils/index'
 import { TPost } from 'types/TPost'
 
 export const makeFakePost = (): TPost => ({

@@ -25,6 +25,7 @@ export default defineConfig({
 			'@assets': '/src/assets',
 			'@images': '/src/assets/images',
 			'@helpers': '/src/helpers',
+			'@utils': '/src/helpers/utils',
 			'@store': '/src/store',
 			'@services': '/src/services',
 			'@routes': '/src/routes',

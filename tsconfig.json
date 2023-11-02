@@ -23,6 +23,7 @@
 			"@assets/*": ["assets/*"],
 			"@images/*": ["assets/images/*"],
 			"@helpers/*": ["helpers/*"],
+			"@utils/*": ["helpers/utils/*"],
 			"@services/*": ["services/*"],
 			"@store/*": ["store/*"],
 			"types/*": ["types/*"],

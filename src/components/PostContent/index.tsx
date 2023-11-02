@@ -4,7 +4,7 @@ import { Button, Container, Paper, Typography } from '@mui/material'
 import { TPost } from 'types/TPost'
 import { AppRoute } from '@helpers/const'
 import style from './PostContent.module.scss'
-import { formatDate } from '@helpers/utils'
+import { formatDate } from '@utils/index'
 
 type PostContentProps = {
 	post: TPost

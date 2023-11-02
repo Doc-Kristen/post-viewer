@@ -2,12 +2,12 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import debounce from 'lodash.debounce'
 import { useAppDispatch } from '@store/store'
-import { calculateVisiblePosts } from '@helpers/utils'
 import { selectPosts } from '@store/post/selector'
 import { setPosts } from '@store/post/slice'
 import { Box, Typography } from '@mui/material'
 import { useGetPaginatedPostsQuery, useLazyGetPaginatedPostsQuery } from '@services/postApi'
 import { ErrorMessage, PostList, Spinner } from '@components/index'
+import { calculateVisiblePosts } from '@utils/index'
 
 const Main: React.FC = () => {
 	const dispatch = useAppDispatch()
