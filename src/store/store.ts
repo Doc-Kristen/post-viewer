@@ -1,22 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { PreloadedState, configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { postsApi } from '@services/postApi'
 import { useDispatch } from 'react-redux'
 import { rootReducer } from './root-reducer'
 
-const createReduxStore = (initialState = {}) => {
-	return configureStore({
+export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
+	configureStore({
 		reducer: rootReducer,
-		preloadedState: initialState,
+		preloadedState,
 		middleware: getDefaultMiddleware => getDefaultMiddleware().concat(postsApi.middleware),
 	})
-}
 
-export const store = createReduxStore()
+export const store = setupStore()
 
 setupListeners(store.dispatch)
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof rootReducer>
+
+export type AppStore = ReturnType<typeof setupStore>
 
 export type AppDispatch = typeof store.dispatch
 
