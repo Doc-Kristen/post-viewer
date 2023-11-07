@@ -8,6 +8,7 @@ import { Box, Typography } from '@mui/material'
 import { useGetPaginatedPostsQuery, useLazyGetPaginatedPostsQuery } from '@services/postApi'
 import { ErrorMessage, PostList, Spinner } from '@components/index'
 import { calculateVisiblePosts } from '@utils/index'
+import { TPost } from 'types/TPost'
 
 const Main: React.FC = () => {
 	const dispatch = useAppDispatch()
@@ -15,57 +16,35 @@ const Main: React.FC = () => {
 
 	// Высота каждой строки
 	const itemSize = 300
-	// Максимальное количество постов (ограничение от API)
+	// Общее количество постов (ограничение от API)
 	const totalCount = 1000
+
 	// Количество подгружаемых постов при скролле
-	const requestStep = 10
+	const requestStep = 15
 
 	// Расчет количества постов для первой отрисовки
 	const firstRenderIndex =
 		calculateVisiblePosts(itemSize) > requestStep ? calculateVisiblePosts(itemSize) : requestStep
 
-	const [count, setCount] = React.useState(firstRenderIndex)
-
 	const [loadMorePosts] = useLazyGetPaginatedPostsQuery()
 
-	const { data, isError, isLoading } = useGetPaginatedPostsQuery(count)
+	const { data, isError, isLoading } = useGetPaginatedPostsQuery(firstRenderIndex)
 
-	const cache = React.useMemo(() => new Set(posts.map(post => post.date)), [posts])
-
-	const loadMore = async (visibleStartIndex: number, visibleStopIndex: number) => {
-		setCount(requestStep)
-
-		const length = visibleStopIndex - visibleStartIndex
-
-		// расчет диапазона постов в зоне видимости
-		const indicesInRange = [...Array(length).keys()].map(x => x + visibleStartIndex)
-
-		// проверка наличия требуемых постов из диапазона среди уже полученных
-		const postsRetrieved = indicesInRange.some(index =>
-			posts[index] ? !!cache.has(posts[index].date) : false,
-		)
-
-		// если все посты в зоне видимости уже загружены - пропустить загрузку
-		if (postsRetrieved) {
-			return
-		}
-
+	const loadMore = async (visibleStartIndex: number) => {
 		await loadMorePosts(requestStep)
 		if (data) {
-			const hasDuoblePost = data.some(post => cache.has(post.date))
-			if (!hasDuoblePost) {
-				dispatch(setPosts([...posts, ...data]))
-			}
+			const newPosts = [...posts]
+			data.forEach((item: TPost, index: number) => {
+				const newIndex = index + visibleStartIndex
+				if (!newPosts[newIndex]) {
+					newPosts[newIndex] = item
+				}
+			})
+			dispatch(setPosts(newPosts))
 		}
 	}
 
 	const debouncedLoadMore = debounce(loadMore, 300)
-
-	React.useEffect(() => {
-		if (!posts.length && !isLoading && !isError && !!data?.length) {
-			dispatch(setPosts(data))
-		}
-	}, [data, dispatch, isError, isLoading, posts.length])
 
 	if (isError) {
 		return <ErrorMessage />

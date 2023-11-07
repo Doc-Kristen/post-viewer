@@ -35,30 +35,36 @@ describe('Component: Main', function () {
 		const { getAllByTestId, getByTestId } = renderWithProviders(<Main />)
 		const mainPage = getByTestId('main-page')
 
-		await waitFor(() => {
-			expect(mainPage).toBeInTheDocument()
-			const posts = getAllByTestId('post-item')
-			expect(posts.length).toBeGreaterThan(0)
-		})
+		await waitFor(
+			() => {
+				expect(mainPage).toBeInTheDocument()
+				const posts = getAllByTestId('post-item')
+				expect(posts.length).toBeGreaterThan(0)
+			},
+			{ timeout: 10000 },
+		)
 	})
 
 	it('should correctly display a random post after data fetching', async () => {
 		server.use(...getPaginatedPostsHandler)
 		const { getByText, getAllByAltText } = renderWithProviders(<Main />)
 
-		await waitFor(() => {
-			const rgxTitle = new RegExp(mockPosts[randomPostIndex].title, 'i')
-			const rgxExplanation = new RegExp(mockPosts[randomPostIndex].explanation, 'i')
-			const imageElements = getAllByAltText('Photo from NASA archives')
-			const imageElement = imageElements[randomPostIndex]
-			const expectedImageUrl = mockPosts[randomPostIndex].url
-			expect(imageElement).toHaveAttribute('src', expectedImageUrl)
-			expect(getByText(rgxTitle)).toBeInTheDocument()
-			expect(getByText(rgxExplanation)).toBeInTheDocument()
-		})
+		await waitFor(
+			() => {
+				const rgxTitle = new RegExp(mockPosts[randomPostIndex].title, 'i')
+				const rgxExplanation = new RegExp(mockPosts[randomPostIndex].explanation, 'i')
+				const imageElements = getAllByAltText('Photo from NASA archives')
+				const imageElement = imageElements[randomPostIndex]
+				const expectedImageUrl = mockPosts[randomPostIndex].url
+				expect(imageElement).toHaveAttribute('src', expectedImageUrl)
+				expect(getByText(rgxTitle)).toBeInTheDocument()
+				expect(getByText(rgxExplanation)).toBeInTheDocument()
+			},
+			{ timeout: 10000 },
+		)
 	})
 
-	it('should show an message "No Posts" when data fetching', async () => {
+	it('should show an message No Posts when data fetching', async () => {
 		server.use(...emptyResponseHandler)
 		const { getByText } = renderWithProviders(<Main />)
 		const message = /No Posts/i

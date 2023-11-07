@@ -18,7 +18,10 @@ const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSi
 	const defaultListHeight = itemSize * totalCount
 
 	// Количество постов ниже поля видимости когда начинается подгрузка данных
-	const overscanCount = 10
+	const overscanCount = 15
+
+	// Показатель, отвечающий за предзагрузку постов
+	const threshold = 0
 
 	const storedIndex = Number(localStorage.getItem('selectedPostIndex'))
 
@@ -33,20 +36,27 @@ const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSi
 
 	const isItemLoaded = (index: number): boolean => !!posts[index]
 
-	const Row = ({ index, style }: ListChildComponentProps) => (
-		<div style={style}>
-			{posts[index] ? (
-				<PostItem key={posts[index].date} post={posts[index]} index={index} />
-			) : (
-				<Skeleton height={itemSize} sx={{ width: '80%', margin: '0 auto' }} />
-			)}
-		</div>
-	)
+	const Row = ({ index, style }: ListChildComponentProps) => {
+		if (index >= totalCount) return null
+		return (
+			<div style={style}>
+				{posts[index] ? (
+					<PostItem key={posts[index].date} post={posts[index]} index={index} />
+				) : (
+					<Skeleton height={itemSize} sx={{ width: '80%', margin: '0 auto' }} />
+				)}
+			</div>
+		)
+	}
 
 	return (
 		<AutoSizer data-testid='post-list'>
 			{({ height, width }) => (
-				<InfiniteLoader isItemLoaded={isItemLoaded} itemCount={totalCount} loadMoreItems={loadMore}>
+				<InfiniteLoader
+					isItemLoaded={isItemLoaded}
+					itemCount={totalCount}
+					loadMoreItems={loadMore}
+					threshold={threshold}>
 					{({ onItemsRendered, ref }) => (
 						<FixedSizeList
 							height={height || defaultListHeight}
