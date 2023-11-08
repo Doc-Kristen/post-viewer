@@ -1,7 +1,7 @@
 .root {
 	.index {
 		font-size: 25px;
-		color: #1A237E;
+		color: #1a237e;
 		@media (max-width: 767px) {
 			font-size: 15px;
 		}
@@ -18,7 +18,13 @@
 		overflow: hidden;
 
 		@media (max-width: 767px) {
-			font-size: 15px;
+			font-size: 10px;
+		}
+	}
+
+	.text span {
+		@media (max-width: 767px) {
+			font-size: 10px;
 		}
 	}
 
@@ -35,24 +41,20 @@
 		background-color: #e8e8e8;
 
 		@media (max-width: 767px) {
-			min-width: 150px;
-			min-height: 150px;
-			max-width: 150px;
-			max-height: 150px;
-		}
-
-		@media (max-width: 375px) {
-			min-width: 100px;
-			min-height: 100px;
-			max-width: 100px;
-			max-height: 100px;
+			min-width: 50px;
+			min-height: 50px;
+			max-width: 50px;
+			max-height: 50px;
 		}
 	}
 
-	.button {
-		@media (max-width: 767px) {
-			font-size: 10px;
-			padding: 5px;
+	.link {
+		max-width: fit-content;
+		.button {
+			@media (max-width: 767px) {
+				font-size: 10px;
+				padding: 2px;
+			}
 		}
 	}
 }
