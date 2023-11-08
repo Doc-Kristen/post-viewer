@@ -20,7 +20,7 @@ const Main: React.FC = () => {
 	const totalCount = 1000
 
 	// Количество подгружаемых постов при скролле
-	const requestStep = 15
+	const requestStep = 20
 
 	// Расчет количества постов для первой отрисовки
 	const firstRenderIndex =

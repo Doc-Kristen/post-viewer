@@ -21,7 +21,7 @@ const PostList: React.FC<PostListProps> = ({ posts, loadMore, totalCount, itemSi
 	const overscanCount = 15
 
 	// Показатель, отвечающий за предзагрузку постов
-	const threshold = 0
+	const threshold = 10
 
 	const storedIndex = Number(localStorage.getItem('selectedPostIndex'))
 
