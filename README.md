@@ -4,7 +4,7 @@
 
 **Особенности приложения**:
 - **Бесконечный скроллинг**: поддерживает бесконечную загрузку статей.
-- **Виртуализация**: используются технологии [react-window ](https://github.com/bvaughn/react-window) и [react-window-infinite-loader](https://www.npmjs.com/package/react-window-infinite-loader) для оптимизации списка статей.
+- **Виртуализация**: используются технологии [react-window ](https://github.com/bvaughn/react-window) и [react-window-infinite-loader](https://www.npmjs.com/package/react-window-infinite-loader) для оптимизации списка статей при загрузке большого количества данных. 
 
 **Стэк**:  
 - TypeScript,
