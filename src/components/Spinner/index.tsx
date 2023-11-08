@@ -1,5 +1,7 @@
-import { Box, CircularProgress } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+import Lottie from 'lottie-react'
 import React from 'react'
+import groovyWalkAnimation from './spinner-animation.json'
 
 const Spinner: React.FC = () => {
 	return (
@@ -11,7 +13,10 @@ const Spinner: React.FC = () => {
 				left: '50%',
 				transform: 'translate(-50%, -50%)',
 			}}>
-			<CircularProgress />
+			<Lottie animationData={groovyWalkAnimation} loop={true} />
+			<Typography variant='h6' component='p'>
+				Connecting to NASA...
+			</Typography>
 		</Box>
 	)
 }
